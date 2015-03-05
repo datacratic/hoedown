@@ -617,7 +617,8 @@ toc_finalize(hoedown_buffer *ob, int inline_render, const hoedown_renderer_data 
 }
 
 hoedown_renderer *
-hoedown_html_toc_renderer_new(int nesting_level)
+hoedown_html_toc_renderer_new(int nesting_level,
+                              void *user_data)
 {
 	static const hoedown_renderer cb_default = {
 		NULL,
@@ -670,6 +671,7 @@ hoedown_html_toc_renderer_new(int nesting_level)
 	memset(state, 0x0, sizeof(hoedown_html_renderer_state));
 
 	state->toc_data.nesting_level = nesting_level;
+        state->user_data = user_data;
 
 	/* Prepare the renderer */
 	renderer = hoedown_malloc(sizeof(hoedown_renderer));
@@ -680,7 +682,8 @@ hoedown_html_toc_renderer_new(int nesting_level)
 }
 
 hoedown_renderer *
-hoedown_html_renderer_new(hoedown_html_flags render_flags, int nesting_level)
+hoedown_html_renderer_new(hoedown_html_flags render_flags, int nesting_level,
+                          void *user_data)
 {
 	static const hoedown_renderer cb_default = {
 		NULL,
@@ -734,6 +737,7 @@ hoedown_html_renderer_new(hoedown_html_flags render_flags, int nesting_level)
 
 	state->flags = render_flags;
 	state->toc_data.nesting_level = nesting_level;
+        state->user_data = user_data;
 
 	/* Prepare the renderer */
 	renderer = hoedown_malloc(sizeof(hoedown_renderer));
