@@ -412,11 +412,11 @@ main(int argc, char **argv)
 	/* Create the renderer */
 	switch (data.renderer) {
 		case RENDERER_HTML:
-			renderer = hoedown_html_renderer_new(data.html_flags, data.toc_level);
+                        renderer = hoedown_html_renderer_new(data.html_flags, data.toc_level, NULL);
 			renderer_free = hoedown_html_renderer_free;
 			break;
 		case RENDERER_HTML_TOC:
-			renderer = hoedown_html_toc_renderer_new(data.toc_level);
+                        renderer = hoedown_html_toc_renderer_new(data.toc_level, NULL);
 			renderer_free = hoedown_html_renderer_free;
 			break;
 	};
